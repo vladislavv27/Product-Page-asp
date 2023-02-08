@@ -1,0 +1,81 @@
+﻿@model webProgram3.Models.ProductListcs
+
+
+@{
+    ViewData["Title"] = "Products";
+   
+}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<h1>Products</h1>
+<div class="col selectmen">
+    <form method="post" asp-action="Index">
+    <select class="form-select small" asp-for="currentcat">
+       
+    <option value="1">Keybord</option>
+        <option value="2">Mouse</option>
+    <option value="3">Headphones</option>
+            <option value="4">Chair</option>
+            <option value="5">Microphone</option>
+                        <option value="6">Monitor</option>
+
+          
+            <option value="10">All</option>
+
+    </select>
+    <button class="btn btn-danger small " type="submit">
+        Submit
+    </button>
+    </form>
+</div>
+<div class="row">
+
+  
+    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+              @foreach (var item in Model.Products)
+                {
+           
+            <div class="col hp">
+              
+                <div class="card h-100 shadow-sm">
+                    <a href="#">
+                            <img src="/img/@item.Image" class="card-img-top" alt="product.title" />
+                    </a>
+
+                    <div class="label-top shadow-sm">
+                            <a class="text-white" href="#">@item.Name</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="clearfix mb-3">
+                            <span class="float-start badge rounded-pill bg-success">@item.Price.ToString("C2")</span>
+
+                        </div>
+                        <h5 class="card-title">
+                                <a target="_blank" href="#">@Html.Raw(item.Description)</a>
+                        </h5>
+
+                        <div class="d-grid gap-2 my-4">
+
+                           
+                                <a type="submit" asp-controller="Cart" asp-action="buy" asp-route-id="@item.Id" class="btn-warning bold-btn">add to cart</a>
+
+                        </div>
+                        <div class="clearfix mb-1">
+
+                     
+                        </div>
+                    </div>
+                </div>
+            
+
+            </div>
+            }
+        </div>
+    </div>
+
+   
+   
+
+</div>
